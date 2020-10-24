@@ -3,7 +3,7 @@ const app = express();
 
 // handle get request to our server
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Hello World!!');
 });
 
 app.get('/api/courses', (req, res) => {
