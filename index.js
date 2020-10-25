@@ -1,13 +1,30 @@
 const express = require('express');
 const app = express();
 
+const courses = [
+    {id: 1, name: 'Course 1'},
+    {id: 2, name: 'Course 2'},
+    {id: 3, name: 'Course 3'}
+]
+
 // handle get request to our server
 app.get('/', (req, res) => {
     res.send('Hello World!!');
 });
 
+// retrieve all courses
 app.get('/api/courses', (req, res) => {
-    res.send(JSON.stringify([1, 2, 3]));
+    res.send(courses);
+});
+
+// using a param to retrieve a specific course
+app.get('/api/courses/:id', (req, res) => {
+    const courseFound = courses.find(course => course.id === parseInt(req.params.id, 10));
+    if (!courseFound) {
+        res.status(404).send(`The course with id '${req.params.id}' was not found`);
+    } else {
+        res.send(courseFound);
+    }
 });
 
 // read PORT from env variable PORT, 3000 as default
