@@ -21,11 +21,11 @@ app.get('/api/courses', (req, res) => {
 
 // using a param to retrieve a specific course
 app.get('/api/courses/:id', (req, res) => {
-    const courseFound = courses.find(course => course.id === parseInt(req.params.id, 10));
-    if (!courseFound) {
+    const course = courses.find(course => course.id === parseInt(req.params.id, 10));
+    if (!course) {
         res.status(404).send(`The course with id '${req.params.id}' was not found`);
     } else {
-        res.send(courseFound);
+        res.send(course);
     }
 });
 
