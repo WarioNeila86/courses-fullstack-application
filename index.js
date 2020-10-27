@@ -52,6 +52,34 @@ app.post('/api/courses', (req, res) => {
     res.send(course);
 });
 
+// update resources
+app.put('/api/courses/:id', (req, res) => {
+    // look for the course
+    // if course does not exist, return 404 / Not Found
+    const course = courses.find(course => course.id === parseInt(req.params.id, 10));
+    if (!course) {
+        res.status(404).send(`The course with id '${req.params.id}' was not found`);
+        return;
+    }
+
+    // validate, if invalid, return 400 / Bad Request
+    const schema = Joi.object({
+        name: Joi.string().min(3).required()
+    });
+
+    const validation = schema.validate(req.body);
+
+    if (validation.error) {
+        const errorMessage = validation.error.details[0].message;
+        res.status(400).send(`Wrong format: ${errorMessage}`);
+        return;
+    }
+
+    // Return updated course
+    course.name = req.body.name;
+    res.send(course);
+});
+
 // read PORT from env variable PORT, 3000 as default
 const port = process.env.PORT || 3000;
 
