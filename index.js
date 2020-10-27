@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const {validateCourse} = require('./validation');
 const express = require('express');
 const app = express();
 
@@ -32,11 +32,7 @@ app.get('/api/courses/:id', (req, res) => {
 
 // create a new course
 app.post('/api/courses', (req, res) => {
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
-
-    const validation = schema.validate(req.body);
+    const validation = validateCourse(req.body);
 
     if (validation.error) {
         const errorMessage = validation.error.details[0].message;
@@ -63,11 +59,7 @@ app.put('/api/courses/:id', (req, res) => {
     }
 
     // validate, if invalid, return 400 / Bad Request
-    const schema = Joi.object({
-        name: Joi.string().min(3).required()
-    });
-
-    const validation = schema.validate(req.body);
+    const validation = validateCourse(req.body);
 
     if (validation.error) {
         const errorMessage = validation.error.details[0].message;
