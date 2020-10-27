@@ -36,8 +36,7 @@ app.post('/api/courses', (req, res) => {
 
     if (validationError) {
         const {message} = validationError;
-        res.status(400).send(`Wrong format: ${message}`);
-        return;
+        return res.status(400).send(`Wrong format: ${message}`);
     }
 
     const course = {
@@ -54,8 +53,7 @@ app.put('/api/courses/:id', (req, res) => {
     // if course does not exist, return 404 / Not Found
     const course = courses.find(course => course.id === parseInt(req.params.id, 10));
     if (!course) {
-        res.status(404).send(`The course with id '${req.params.id}' was not found`);
-        return;
+        return res.status(404).send(`The course with id '${req.params.id}' was not found`);
     }
 
     // validate, if invalid, return 400 / Bad Request
@@ -63,8 +61,7 @@ app.put('/api/courses/:id', (req, res) => {
 
     if (validationError) {
         const {message} = validationError;
-        res.status(400).send(`Wrong format: ${message}`);
-        return;
+        return res.status(400).send(`Wrong format: ${message}`);
     }
 
     // Return updated course
@@ -78,8 +75,7 @@ app.delete('/api/courses/:id', (req, res) => {
     // if course does not exist, return 404 / Not Found
     const course = courses.find(course => course.id === parseInt(req.params.id, 10));
     if (!course) {
-        res.status(404).send(`The course with id '${req.params.id}' was not found`);
-        return;
+        return res.status(404).send(`The course with id '${req.params.id}' was not found`);
     }
 
     // delete the course
