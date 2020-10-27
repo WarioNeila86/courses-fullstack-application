@@ -32,11 +32,11 @@ app.get('/api/courses/:id', (req, res) => {
 
 // create a new course
 app.post('/api/courses', (req, res) => {
-    const validation = validateCourse(req.body);
+    const {error: validationError} = validateCourse(req.body);
 
-    if (validation.error) {
-        const errorMessage = validation.error.details[0].message;
-        res.status(400).send(`Wrong format: ${errorMessage}`);
+    if (validationError) {
+        const {message} = validationError;
+        res.status(400).send(`Wrong format: ${message}`);
         return;
     }
 
@@ -59,11 +59,11 @@ app.put('/api/courses/:id', (req, res) => {
     }
 
     // validate, if invalid, return 400 / Bad Request
-    const validation = validateCourse(req.body);
+    const {error: validationError} = validateCourse(req.body);
 
-    if (validation.error) {
-        const errorMessage = validation.error.details[0].message;
-        res.status(400).send(`Wrong format: ${errorMessage}`);
+    if (validationError) {
+        const {message} = validationError;
+        res.status(400).send(`Wrong format: ${message}`);
         return;
     }
 
