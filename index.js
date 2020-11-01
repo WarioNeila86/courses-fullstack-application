@@ -2,15 +2,18 @@ const {validateCourse} = require('./validation');
 const express = require('express');
 const app = express();
 
+// recognize the incoming request object as a JSON Object - this method is called as a middleware
 app.use(express.json());
 
+// list of courses
+// TODO: move this into a DB in the future
 const courses = [
     {id: 1, name: 'Course 1'},
     {id: 2, name: 'Course 2'},
     {id: 3, name: 'Course 3'}
-]
+];
 
-// handle get request to our server
+// GET request for the root path of the server will show a Hello World message
 app.get('/', (req, res) => {
     res.send('Hello World!!');
 });
@@ -20,7 +23,7 @@ app.get('/api/courses', (req, res) => {
     res.send(courses);
 });
 
-// using a param to retrieve a specific course
+// retrieve a specific course by providing its id in url path
 app.get('/api/courses/:id', (req, res) => {
     const course = courses.find(course => course.id === parseInt(req.params.id, 10));
     if (!course) {
@@ -30,7 +33,7 @@ app.get('/api/courses/:id', (req, res) => {
     }
 });
 
-// create a new course
+// create a new course providing its name in request body
 app.post('/api/courses', (req, res) => {
     const {error: validationError} = validateCourse(req.body);
 
@@ -47,7 +50,7 @@ app.post('/api/courses', (req, res) => {
     res.send(course);
 });
 
-// update resources
+// update an existing course by providing its id in url path and new name in body
 app.put('/api/courses/:id', (req, res) => {
     // look for the course
     // if course does not exist, return 404 / Not Found
@@ -69,7 +72,7 @@ app.put('/api/courses/:id', (req, res) => {
     res.send(course);
 });
 
-// delete a course
+// delete a course by providing its id in url path
 app.delete('/api/courses/:id', (req, res) => {
     // look for the course
     // if course does not exist, return 404 / Not Found
@@ -86,10 +89,10 @@ app.delete('/api/courses/:id', (req, res) => {
     res.send(course);
 });
 
-// read PORT from env variable PORT, 3000 as default
+// read PORT from env variable PORT or use port 3000 as default
 const port = process.env.PORT || 3000;
 
-// make our app listen at a given port
+// start the server listening at a given port
 app.listen(port, () => {
     console.log(`Listening on ${port}...`);
 });
