@@ -1,5 +1,5 @@
 const database = require('../src/models');
-const { validateCourse } = require('../../../validation');
+const { validateCourse } = require('../utils/validation');
 
 const getCourses = async (req, res) => {
     await database.Course.findAll()
