@@ -2,6 +2,7 @@
 
 ## How to:
 * Run the app: `npm start`
+* Run unit tests: `npm test`
 
 ## Sources
 * 📺 YouTube course: [How to build a REST API with Node js & Express
