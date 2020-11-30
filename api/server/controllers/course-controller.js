@@ -3,6 +3,10 @@ const { validateCourse } = require('../utils/validation');
 
 class CourseController {
 
+    /**
+     * Returns all courses stored in database
+     * @returns {Promise<Array<Object>>} List of courses found in database
+     */
     async getCourses() {
         const courses = await database.Course.findAll();
         if (courses) {
@@ -14,6 +18,12 @@ class CourseController {
         }
     }
 
+    /**
+     * Returns specific course from database searching by id
+     * Throws an error if the course is not found
+     * @param {number} id - The id of the course to retrieve
+     * @returns {Promise<Object>} Found course
+     */
     async getCourse(id) {
         const foundCourse = await database.Course.findOne({
             where: { id }
@@ -27,6 +37,12 @@ class CourseController {
         }
     }
 
+    /**
+     * Creates a course in the database
+     * * Throws an error if the name format is incorrect
+     * @param {Object} course - Object containing course name
+     * @returns {Promise<Object>} Course created
+     */
     async createCourse(course) {
         // validate, if invalid, throw 400 error / Bad Request
         const { error: validationError } = validateCourse(course);
@@ -46,6 +62,13 @@ class CourseController {
         }
     }
 
+    /**
+     * Modifies a course already stored in the database
+     * Throws an error if the course is not found or the new name format is incorrect
+     * @param {Object} course - Object containing the new course name
+     * @param {number} id - The id of the course to modify
+     * @returns {Promise<Object>} Course modified
+     */
     async updateCourse(course, id) {
         // validate, if invalid, return 400 / Bad Request
         const { error: validationError } = validateCourse(course);
@@ -75,10 +98,15 @@ class CourseController {
                 error.message = `Unable to update course: ${error.message}`;
                 throw error;
             }
-            
         }
     }
 
+    /**
+     * Deletes a course from the database
+     * Throws an error if the course is not found
+     * @param {number} id - The id of the course to delete
+     * @returns {Promise<Object>} Course deleted
+     */
     async deleteCourse(id) {
         // search for the course, if course does not exist return 404 / Not Found
         const foundCourse = await database.Course.findOne({
