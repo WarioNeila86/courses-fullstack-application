@@ -1,88 +1,102 @@
 const database = require('../src/models');
 const { validateCourse } = require('../utils/validation');
 
-const getCourses = async (req, res) => {
-    await database.Course.findAll()
-        .then(books => res.send(books))
-        .catch(error => res.status(404).send(error.message));
-}
+class CourseController {
 
-const getCourse = async (req, res) => {
-    const foundCourse = await database.Course.findOne({
-        where: { id: Number(req.params.id) }
-    });
-    if (!foundCourse) {
-        res.status(404).send(`The course with id '${req.params.id}' was not found`);
-    } else {
-        res.send(foundCourse);
-    }
-}
-
-const createCourse = async (req, res) => {
-    const newCourse = req.body;
-
-    // validate, if invalid, return 400 / Bad Request
-    const { error: validationError } = validateCourse(newCourse);
-    if (validationError) {
-        const { message } = validationError;
-        return res.status(400).send(`Wrong format: ${message}`);
-    }
-    const addedCourse = await database.Course.create(newCourse);
-    if (addedCourse) {
-        res.send(addedCourse);
-    } else {
-        console.log('Unable to add course');
-    }
-}
-
-const updateCourse = async (req, res) => {
-    const newData = req.body;
-
-    // validate, if invalid, return 400 / Bad Request
-    const { error: validationError } = validateCourse(newData);
-    if (validationError) {
-        const { message } = validationError;
-        return res.status(400).send(`Wrong format: ${message}`);
+    async getCourses() {
+        const courses = await database.Course.findAll();
+        if (courses) {
+            return courses;
+        } else {
+            const error = new Error('No courses were found');
+            error.status = 404;
+            throw error;
+        }
     }
 
-    // search for the course, if course does not exist return 404 / Not Found
-    const foundCourse = await database.Course.findOne({
-        where: { id: Number(req.params.id) }
-    });
-    if (!foundCourse) {
-        return res.status(404).send(`The course with id '${req.params.id}' was not found`);
-    } else {
-        // if found, replace the name and save the changes -- this will perform the UPDATE in DB
-        foundCourse.name = newData.name;
-        await foundCourse.save();
-        res.send(foundCourse);
-    }
-}
-
-const deleteCourse = async (req, res) => {
-    // search for the course, if course does not exist return 404 / Not Found
-    const foundCourse = await database.Course.findOne({
-        where: { id: Number(req.params.id) }
-    });
-    if (!foundCourse) {
-        res.status(404).send(`The course with id '${req.params.id}' was not found`);
-    } else {
-        // if found, delete the course
-        await database.Course.destroy({
-            where: {
-                id: Number(req.params.id)
-            }
+    async getCourse(id) {
+        const foundCourse = await database.Course.findOne({
+            where: { id }
         });
+        if (!foundCourse) {
+            const error = new Error(`The course with id '${id}' was not found`);
+            error.status = 404;
+            throw error;
+        } else {
+            return foundCourse;
+        }
+    }
 
-        // return deleted course -- sequelize destroy returns the number of deleted rows, not the rows itself
-        res.send(foundCourse);
+    async createCourse(course) {
+        // validate, if invalid, throw 400 error / Bad Request
+        const { error: validationError } = validateCourse(course);
+        if (validationError) {
+            const { message } = validationError;
+            const error = new Error(`Wrong format: ${message}`);
+            error.status = 400;
+            throw error;
+        }
+        try {
+            const addedCourse = await database.Course.create(course);
+            return addedCourse;
+        } catch (error) {
+            error.status = 500;
+            error.message = `Unable to add course: ${error.message}`;
+            throw error;
+        }
+    }
+
+    async updateCourse(course, id) {
+        // validate, if invalid, return 400 / Bad Request
+        const { error: validationError } = validateCourse(course);
+        if (validationError) {
+            const { message } = validationError;
+            const error = new Error(`Wrong format: ${message}`);
+            error.status = 400;
+            throw error;
+        }
+
+        // search for the course, if course does not exist return 404 / Not Found
+        const foundCourse = await database.Course.findOne({
+            where: { id }
+        });
+        if (!foundCourse) {
+            const error = new Error(`The course with id '${id}' was not found`);
+            error.status = 404;
+            throw error;
+        } else {
+            // if found, replace the name and save the changes -- this will perform the UPDATE in DB
+            foundCourse.name = course.name;
+            try {
+                await foundCourse.save();
+                return foundCourse;
+            } catch (error) {
+                error.status = 500;
+                error.message = `Unable to update course: ${error.message}`;
+                throw error;
+            }
+            
+        }
+    }
+
+    async deleteCourse(id) {
+        // search for the course, if course does not exist return 404 / Not Found
+        const foundCourse = await database.Course.findOne({
+            where: { id }
+        });
+        if (!foundCourse) {
+            const error = new Error(`The course with id '${id}' was not found`);
+            error.status = 404;
+            throw error;
+        } else {
+            // delete the course
+            await database.Course.destroy({
+                where: { id }
+            });
+            // return deleted course -- sequelize destroy returns the number of deleted rows, not the rows itself
+            return foundCourse;
+        }
     }
 }
 
-module.exports = {
-    getCourses,
-    getCourse,
-    createCourse,
-    updateCourse,
-    deleteCourse
-}
+module.exports.CourseController = CourseController;
