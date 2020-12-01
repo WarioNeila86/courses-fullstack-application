@@ -117,12 +117,18 @@ class CourseController {
             error.status = 404;
             throw error;
         } else {
-            // delete the course
-            await database.Course.destroy({
-                where: { id }
-            });
-            // return deleted course -- sequelize destroy returns the number of deleted rows, not the rows itself
-            return foundCourse;
+            try {
+                // delete the course
+                await database.Course.destroy({
+                    where: { id }
+                });
+                // return deleted course -- sequelize destroy returns the number of deleted rows, not the rows itself
+                return foundCourse;
+            } catch (error) {
+                error.status = 500;
+                error.message = `Unable to delete course: ${error.message}`;
+                throw error;
+            }
         }
     }
 }

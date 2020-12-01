@@ -231,4 +231,20 @@ describe('deleteCourse tests', () => {
             expect(error.message).toEqual(`The course with id '${id}' was not found`);
         }
     });
+
+    test('should throw an error if deleting in database failed', async () => {
+        const id = 1;
+        const expectedResponse = { id, name: 'Course 1' };
+        database.Course.findOne = jest.fn(() => Promise.resolve(expectedResponse));
+        database.Course.destroy = jest.fn(() => Promise.reject(new Error('Database problem deleting data')));
+        try {
+            await courseController.deleteCourse(id);
+            expect(true).toBe(false);
+        } catch (error) {
+            expect(database.Course.findOne).toHaveBeenCalledTimes(1);
+            expect(database.Course.destroy).toHaveBeenCalledTimes(1);
+            expect(error.status).toBe(500);
+            expect(error.message).toBe('Unable to delete course: Database problem deleting data');
+        }
+    });
 });
