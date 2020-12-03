@@ -1,5 +1,5 @@
-jest.mock('../src/models');
-const database = require('../src/models');
+jest.mock('../db/models');
+const database = require('../db/models');
 
 jest.mock('../utils/validation');
 const { validateCourse } = require('../utils/validation');

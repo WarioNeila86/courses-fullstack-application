@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const courseRouter = require('./api/server/routes/course-routes');
+const courseRouter = require('./api/routes/course-routes');
 
 // recognize the incoming request object as a JSON Object - this method is called as a middleware
 app.use(express.json());

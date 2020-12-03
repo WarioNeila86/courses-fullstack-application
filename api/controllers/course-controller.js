@@ -1,4 +1,4 @@
-const database = require('../src/models');
+const database = require('../db/models');
 const { validateCourse } = require('../utils/validation');
 
 class CourseController {
