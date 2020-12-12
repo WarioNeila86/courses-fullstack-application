@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// const {createCourse, deleteCourse, getCourse, getCourses, updateCourse} = require('../controllers/course-controller');
 const {CourseController} = require('../controllers/course-controller');
 
 // Retrieve all courses route
@@ -11,7 +10,7 @@ router.get('/', async (req, res) => {
     res.send(courses);
 });
 
-// retrieve a specific course by providing its id in url path
+// Retrieve specific course by id
 router.get('/:id', async (req, res) => {
     const courseController = new CourseController();
     try {
@@ -22,7 +21,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// create a new course providing its name in request body
+// Create new course providing its name in request body
 router.post('/', async (req, res) => {
     const courseController = new CourseController();
     try {
@@ -34,7 +33,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-// update an existing course by providing its id in url path and new name in body
+// Update an existing course by providing its id in url path and new name in body
 router.put('/:id', async (req, res) => {
     const courseController = new CourseController();
     try {
