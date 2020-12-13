@@ -77,7 +77,7 @@ test('should update existing course', async () => {
     mockCourseController.updateCourse.mockImplementationOnce(() => Promise.resolve({id, ...newCourse}));
     const response = await request(app).put(`/api/courses/${id}`).send(newCourse);
     expect(mockCourseController.updateCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.updateCourse).toBeCalledWith(newCourse, id);
+    expect(mockCourseController.updateCourse).toBeCalledWith(id, newCourse);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({id, ...newCourse});
 });
@@ -90,7 +90,7 @@ test('should return an error if course not updated', async () => {
     mockCourseController.updateCourse.mockImplementationOnce(() => Promise.reject(error));
     const response = await request(app).put(`/api/courses/${id}`).send(newCourse);
     expect(mockCourseController.updateCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.updateCourse).toBeCalledWith(newCourse, id);
+    expect(mockCourseController.updateCourse).toBeCalledWith(id, newCourse);
     expect(response.status).toBe(500);
     expect(response.text).toEqual('Unable to update course');
 });
