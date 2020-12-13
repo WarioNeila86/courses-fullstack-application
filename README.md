@@ -1,6 +1,6 @@
 # REST API with Node.js, Express & Sequelize
 
-REST API server to manage courses, it allows you to do CRUD operations with them:
+REST API server to manage courses, it allows you to perform CRUD operations with them:
 * **C**reate new courses
 * **R**ead existing courses (get the full list or search by id)
 * **U**pdate existing course
