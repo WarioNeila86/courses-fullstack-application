@@ -79,38 +79,6 @@ describe('createCourse tests', () => {
         expect(result).toBe(createdCourse);
     });
 
-    test('should throw an error if the course format is incorrect', async () => {
-        const course = { name: 'Co' };
-        validateCourse.mockImplementationOnce(() => ({
-            error: {
-                message: '"name" length must be at least 3 characters long'
-            }
-        }));
-        try {
-            await courseController.createCourse(course);
-        } catch (error) {
-            expect(validateCourse).toHaveBeenCalledTimes(1);
-            expect(error.status).toBe(400);
-            expect(error.message).toBe('Wrong format: "name" length must be at least 3 characters long');
-        }
-    });
-
-    test('should throw an error if name is missing', async () => {
-        const course = {};
-        validateCourse.mockImplementationOnce(() => ({
-            error: {
-                message: '"name" is required'
-            }
-        }));
-        try {
-            await courseController.createCourse(course);
-        } catch (error) {
-            expect(validateCourse).toHaveBeenCalledTimes(1);
-            expect(error.status).toBe(400);
-            expect(error.message).toBe('Wrong format: "name" is required');
-        }
-    });
-
     test('should return error from dbHelper.createCourse', async () => {
         const course = { name: 'Course 1' };
         validateCourse.mockImplementationOnce(() => 'Success');
@@ -137,38 +105,6 @@ describe('updateCourse tests', () => {
         expect(mockDbHelper.updateCourse).toHaveBeenCalledTimes(1);
         expect(result).toBe(updatedCourse);
         expect(result).toHaveProperty('id');
-    });
-
-    test('should throw an error if the course format is incorrect', async () => {
-        const course = { name: 'Co' };
-        validateCourse.mockImplementationOnce(() => ({
-            error: {
-                message: '"name" length must be at least 3 characters long'
-            }
-        }));
-        try {
-            await courseController.updateCourse(course);
-        } catch (error) {
-            expect(validateCourse).toHaveBeenCalledTimes(1);
-            expect(error.status).toBe(400);
-            expect(error.message).toBe('Wrong format: "name" length must be at least 3 characters long');
-        }
-    });
-
-    test('should throw an error if name is missing', async () => {
-        const course = {};
-        validateCourse.mockImplementationOnce(() => ({
-            error: {
-                message: '"name" is required'
-            }
-        }));
-        try {
-            await courseController.updateCourse(course);
-        } catch (error) {
-            expect(validateCourse).toHaveBeenCalledTimes(1);
-            expect(error.status).toBe(400);
-            expect(error.message).toBe('Wrong format: "name" is required');
-        }
     });
 
     test('should return error from dbHelper.updateCourse', async () => {
@@ -223,6 +159,50 @@ describe('deleteCourse tests', () => {
             expect(mockDbHelper.deleteCourse).toHaveBeenCalledTimes(1);
             expect(error.message).toBe('dbHelper.deleteCourse error');
             expect(result).toBe(undefined);
+        }
+    });
+});
+
+describe('checkCourseFormat tests', () => {
+    test('should not throw an error if validation is successful', async () => {
+        const course = { name: 'Course 1' };
+        validateCourse.mockImplementationOnce(() => 'Success');
+        expect(() => courseController.checkCourseFormat(course)).not.toThrow();
+        expect(validateCourse).toHaveBeenCalledTimes(1);
+        expect(validateCourse).toHaveBeenCalledWith(course);
+    });
+
+    test('should throw an error if the course name length is incorrect', async () => {
+        const course = { name: 'Co' };
+        validateCourse.mockImplementationOnce(() => ({
+            error: {
+                message: '"name" length must be at least 3 characters long'
+            }
+        }));
+        try {
+            courseController.checkCourseFormat(course);
+        } catch (error) {
+            expect(validateCourse).toHaveBeenCalledTimes(1);
+            expect(validateCourse).toHaveBeenCalledWith(course);
+            expect(error.status).toBe(400);
+            expect(error.message).toBe('Wrong format: "name" length must be at least 3 characters long');
+        }
+    });
+
+    test('should throw an error if course name is missing', async () => {
+        const course = {};
+        validateCourse.mockImplementationOnce(() => ({
+            error: {
+                message: '"name" is required'
+            }
+        }));
+        try {
+            courseController.checkCourseFormat(course);
+        } catch (error) {
+            expect(validateCourse).toHaveBeenCalledTimes(1);
+            expect(validateCourse).toHaveBeenCalledWith(course);
+            expect(error.status).toBe(400);
+            expect(error.message).toBe('Wrong format: "name" is required');
         }
     });
 });

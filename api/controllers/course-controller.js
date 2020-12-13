@@ -32,14 +32,7 @@ class CourseController {
      * @returns {Promise<Object>} Course created
      */
     async createCourse(course) {
-        // validate, if invalid, throw 400 error / Bad Request
-        const { error: validationError } = validateCourse(course);
-        if (validationError) {
-            const { message } = validationError;
-            const error = new Error(`Wrong format: ${message}`);
-            error.status = 400;
-            throw error;
-        }
+        this.checkCourseFormat(course);
         return await this._dbHelper.createCourse(course);
     }
 
@@ -51,15 +44,7 @@ class CourseController {
      * @returns {Promise<Object>} Course modified
      */
     async updateCourse(id, course) {
-        // validate, if invalid, return 400 / Bad Request
-        const { error: validationError } = validateCourse(course);
-        if (validationError) {
-            const { message } = validationError;
-            const error = new Error(`Wrong format: ${message}`);
-            error.status = 400;
-            throw error;
-        }
-
+        this.checkCourseFormat(course);
         return await this._dbHelper.updateCourse(id, course.name);
     }
 
@@ -73,6 +58,20 @@ class CourseController {
         const courseToDelete = await this._dbHelper.findCourseById(id);
         await this._dbHelper.deleteCourse(id);
         return courseToDelete;
+    }
+
+    /**
+     * Check course object format, throws an 400 Bad Request error if the object is invalid
+     * @param {{name: string}} course - Object containing course name
+     */
+    checkCourseFormat(course) {
+        const { error: validationError } = validateCourse(course);
+        if (validationError) {
+            const { message } = validationError;
+            const error = new Error(`Wrong format: ${message}`);
+            error.status = 400;
+            throw error;
+        }
     }
 }
 
