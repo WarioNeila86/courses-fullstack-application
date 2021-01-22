@@ -1,10 +1,13 @@
+const { logger } = require('../../../logger');
+
 module.exports = {
   "development": {
     "username": "courses-api-dbuser",
     "password": 123456,
     "database": "courses-api-db",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": msg => logger.info(msg)
   },
   "test": {
     "username": "root",
