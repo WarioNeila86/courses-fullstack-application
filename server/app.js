@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const courseRouter = require('./api/routes/course-routes');
+const courseRouter = require('./routes/course-routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
