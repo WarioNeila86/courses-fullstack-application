@@ -1,4 +1,5 @@
 node_modules
-coverage
-logs
 .vscode
+server/logs
+server/node_modules
+server/coverage
