@@ -1,5 +1,1 @@
-node_modules
 .vscode
-server/logs
-server/node_modules
-server/coverage
