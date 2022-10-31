@@ -50,6 +50,7 @@ const { CourseController } = require('../controllers/course-controller');
 router.get('/', async (req, res) => {
     const courseController = new CourseController();
     const courses = await courseController.getCourses();
+    res.header("Access-Control-Allow-Origin", "*");
     res.send(courses);
 });
 
