@@ -31,7 +31,7 @@ const { CourseController } = require('../controllers/course-controller');
 
 /**
  * @swagger
- * /courses/:
+ * /api/courses/:
  *   get:
  *     tags:
  *       - Courses
@@ -56,7 +56,7 @@ router.get('/', async (req, res) => {
 
 /**
  * @swagger
- * /courses/{id}:
+ * /api/courses/{id}:
  *   get:
  *     tags:
  *       - Courses
@@ -94,7 +94,7 @@ router.get('/:id', async (req, res) => {
 
 /**
  * @swagger
- * /courses/:
+ * /api/courses/:
  *   post:
  *     tags:
  *       - Courses
@@ -144,7 +144,7 @@ router.post('/', async (req, res) => {
 
 /**
  * @swagger
- * /courses/{id}:
+ * /api/courses/{id}:
  *   put:
  *     tags:
  *       - Courses
@@ -200,7 +200,7 @@ router.put('/:id', async (req, res) => {
 
 /**
  * @swagger
- * /courses/{id}:
+ * /api/courses/{id}:
  *   delete:
  *     tags:
  *       - Courses
