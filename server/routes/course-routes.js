@@ -84,6 +84,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/:id', async (req, res) => {
     const courseController = new CourseController();
+    res.header("Access-Control-Allow-Origin", "*");
     try {
         const foundCourse = await courseController.getCourse(Number(req.params.id));
         res.send(foundCourse);

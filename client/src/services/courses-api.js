@@ -12,3 +12,14 @@ export const getAllCourses = async () => {
   console.log(response);
   return response.data;
 }
+
+/**
+ * Gets course by id from the server
+ *
+ * @returns Promise<object> - specific course
+ */
+ export const getCourseById = async id => {
+  const response = await axios.get(`${baseUrl}/api/courses/${id}`);
+  console.log(response);
+  return response.data;
+}
