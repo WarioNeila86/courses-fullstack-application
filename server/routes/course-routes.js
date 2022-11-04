@@ -48,10 +48,10 @@ const { CourseController } = require('../controllers/course-controller');
  *                 $ref: '#/components/schemas/Course'
  */
 router.get('/', async (req, res) => {
-    const courseController = new CourseController();
-    const courses = await courseController.getCourses();
-    res.header("Access-Control-Allow-Origin", "*");
-    res.send(courses);
+  const courseController = new CourseController();
+  const courses = await courseController.getCourses();
+  res.header('Access-Control-Allow-Origin', '*');
+  res.send(courses);
 });
 
 /**
@@ -83,14 +83,14 @@ router.get('/', async (req, res) => {
  *               $ref: '#/components/schemas/Error'
  */
 router.get('/:id', async (req, res) => {
-    const courseController = new CourseController();
-    res.header("Access-Control-Allow-Origin", "*");
-    try {
-        const foundCourse = await courseController.getCourse(Number(req.params.id));
-        res.send(foundCourse);
-    } catch (error) {
-        res.status(error.status).send(error.message);
-    }
+  const courseController = new CourseController();
+  res.header('Access-Control-Allow-Origin', '*');
+  try {
+    const foundCourse = await courseController.getCourse(Number(req.params.id));
+    res.send(foundCourse);
+  } catch (error) {
+    res.status(error.status).send(error.message);
+  }
 });
 
 /**
@@ -133,14 +133,14 @@ router.get('/:id', async (req, res) => {
  *               $ref: '#/components/schemas/Error'
  */
 router.post('/', async (req, res) => {
-    const courseController = new CourseController();
-    try {
-        const addedCourse = await courseController.createCourse(req.body);
-        res.status(201);
-        res.send(addedCourse);
-    } catch (error) {
-        res.status(error.status).send(error.message);
-    }
+  const courseController = new CourseController();
+  try {
+    const addedCourse = await courseController.createCourse(req.body);
+    res.status(201);
+    res.send(addedCourse);
+  } catch (error) {
+    res.status(error.status).send(error.message);
+  }
 });
 
 /**
@@ -190,13 +190,13 @@ router.post('/', async (req, res) => {
  *               $ref: '#/components/schemas/Error'
  */
 router.put('/:id', async (req, res) => {
-    const courseController = new CourseController();
-    try {
-        const updatedCourse = await courseController.updateCourse(Number(req.params.id), req.body);
-        res.send(updatedCourse);
-    } catch (error) {
-        res.status(error.status).send(error.message);
-    }
+  const courseController = new CourseController();
+  try {
+    const updatedCourse = await courseController.updateCourse(Number(req.params.id), req.body);
+    res.send(updatedCourse);
+  } catch (error) {
+    res.status(error.status).send(error.message);
+  }
 });
 
 /**
@@ -228,13 +228,13 @@ router.put('/:id', async (req, res) => {
  *               $ref: '#/components/schemas/Error'
  */
 router.delete('/:id', async (req, res) => {
-    const courseController = new CourseController();
-    try {
-        const deletedCourse = await courseController.deleteCourse(Number(req.params.id));
-        res.send(deletedCourse);
-    } catch (error) {
-        res.status(error.status).send(error.message);
-    }
+  const courseController = new CourseController();
+  try {
+    const deletedCourse = await courseController.deleteCourse(Number(req.params.id));
+    res.send(deletedCourse);
+  } catch (error) {
+    res.status(error.status).send(error.message);
+  }
 });
 
 module.exports = router;
