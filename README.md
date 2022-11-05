@@ -31,7 +31,7 @@ For now the frontend client shows all courses and allows searching by id
 * Clone this repo
 * Install project dependencies by running `npm install`
 
-### How to execute the app/tests:
+### How to execute the server/client app:
 * Start the server: `npm run server-start` - server can be accessed on http://localhost:4000/
 * Start the server in development mode (it will automatically restart after changes are made): `npm run server-start-dev`
 * Start the client: `npm run client-run-dev` - client can be accessed on http://localhost:3000/
