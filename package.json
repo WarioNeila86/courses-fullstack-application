@@ -15,11 +15,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WarioNeila86/express-rest-api.git"
+    "url": "git+https://github.com/WarioNeila86/courses-fullstack-application.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/WarioNeila86/express-rest-api#readme",
+  "homepage": "https://github.com/WarioNeila86/courses-fullstack-application#readme",
   "dependencies": {
     "axios": "^1.1.3",
     "express": "^4.17.1",
