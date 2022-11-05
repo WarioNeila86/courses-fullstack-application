@@ -22,7 +22,7 @@ const options = {
       }
     }
   },
-  apis: ['./routes/course-routes.js']
+  apis: ['server/routes/course-routes.js']
 };
 
 const specs = swaggerJsdoc(options);
@@ -36,10 +36,5 @@ app.use(
 app.use(express.json());
 // Add /api/courses router to middleware chain
 app.use('/api/courses', courseRouter);
-
-// GET request for the root path of the server will show a Hello World message
-app.get('/', (req, res) => {
-  res.send('Hello World!!');
-});
 
 module.exports = app;
