@@ -1,7 +1,7 @@
 {
   "name": "courses-fullstack-application",
   "version": "1.0.0",
-  "description": "Fullstack application using Express and React to perform CRUD operations with courses API",
+  "description": "Full Stack application to manage courses using PERN stack",
   "scripts": {
     "client-run-dev": "vite serve client --config client/vite.config.js",
     "client-build": "vite build",
