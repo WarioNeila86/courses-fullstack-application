@@ -28,6 +28,7 @@
     "pg-hstore": "^2.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
     "sequelize": "^6.3.5",
     "swagger-jsdoc": "^6.0.1",
     "swagger-ui-express": "^4.1.6",
