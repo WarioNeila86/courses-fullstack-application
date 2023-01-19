@@ -1,9 +1,10 @@
+require('dotenv').config();
 const { logger } = require('../../logger');
 
 module.exports = {
   development: {
-    username: 'courses-api-dbuser',
-    password: '123456',
+    username: process.env.DB_DEVELOPMENT_USERNAME,
+    password: process.env.DB_DEVELOPMENT_PASSWORD,
     database: 'courses-api-db',
     host: '127.0.0.1',
     dialect: 'postgres',
