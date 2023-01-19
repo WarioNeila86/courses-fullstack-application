@@ -30,6 +30,11 @@ For now the frontend client shows all courses and allows searching by id
 * Install [nodeJS](https://nodejs.org/en/)
 * Clone this repo
 * Install project dependencies by running `npm install`
+* Install postgresql database:
+* Create DB user: `sudo -u postgres psql -c "CREATE USER \"courses-api-dbuser\" PASSWORD '123456' CREATEDB;"`
+* Create database: `npx sequelize-cli db:create`
+* Create tables: `npx sequelize-cli db:migrate`
+* Populate table: `npx sequelize-cli db:seed:all`
 
 ### How to execute the server/client app:
 * Start the server: `npm run server-start` - server can be accessed on http://localhost:4000/
