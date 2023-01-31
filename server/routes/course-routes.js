@@ -50,7 +50,6 @@ const { CourseController } = require('../controllers/course-controller');
 router.get('/', async (req, res) => {
   const courseController = new CourseController();
   const courses = await courseController.getCourses();
-  res.header('Access-Control-Allow-Origin', '*');
   res.send(courses);
 });
 
@@ -84,7 +83,6 @@ router.get('/', async (req, res) => {
  */
 router.get('/:id', async (req, res) => {
   const courseController = new CourseController();
-  res.header('Access-Control-Allow-Origin', '*');
   try {
     const foundCourse = await courseController.getCourse(Number(req.params.id));
     res.send(foundCourse);

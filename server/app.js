@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const courseRouter = require('./routes/course-routes');
 const swaggerUi = require('swagger-ui-express');
@@ -31,6 +32,8 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(specs)
 );
+
+app.use(cors());
 
 // recognize the incoming request object as a JSON Object - this method is called as a middleware
 app.use(express.json());
