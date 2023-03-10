@@ -5,10 +5,7 @@
   "scripts": {
     "client-run-dev": "vite serve client --config client/vite.config.js",
     "client-build": "vite build",
-    "client-format": "prettier --write client/.",
-    "client-lint": "eslint client/. --ext .js,.jsx",
     "client-preview": "vite preview",
-    "server-lint": "eslint server/.",
     "server-start": "node server/server.js",
     "server-start-dev": "nodemon server/server.js",
     "test": "jest",
