@@ -23,3 +23,15 @@ export const getCourseById = async (id) => {
   console.log(response)
   return response.data
 }
+
+/**
+ * Creates new course
+ *
+ * @returns Promise<object> - specific course
+ */
+export const createCourse = async (courseName) => {
+  const body = { name: courseName }
+  const response = await axios.post(`${baseUrl}/api/courses/`, body)
+  console.log(response)
+  return response.data
+}
