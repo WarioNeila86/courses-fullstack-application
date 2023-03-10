@@ -8,7 +8,7 @@ module.exports = {
       version: 'detect'
     }
   },
-  extends: ['plugin:react/recommended', 'standard', 'eslint-config-prettier'],
+  extends: ['plugin:react/recommended', 'standard', 'prettier'],
   overrides: [],
   parserOptions: {
     ecmaVersion: 'latest',
