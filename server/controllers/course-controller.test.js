@@ -5,7 +5,9 @@ const mockDbHelper = {
   updateCourse: jest.fn(),
   deleteCourse: jest.fn()
 };
-jest.mock('../helpers/db-helpers', () => ({ DbHelper: jest.fn().mockImplementation(() => mockDbHelper) }));
+jest.mock('../helpers/db-helpers', () => ({
+  DbHelper: jest.fn().mockImplementation(() => mockDbHelper)
+}));
 
 jest.mock('../utils/validation');
 const { validateCourse } = require('../utils/validation');
@@ -32,7 +34,9 @@ describe('getCourses tests', () => {
 
   test('should throw an error if there are no courses', async () => {
     const expectedResponse = undefined;
-    mockDbHelper.findAllCourses = jest.fn(() => Promise.resolve(expectedResponse));
+    mockDbHelper.findAllCourses = jest.fn(() =>
+      Promise.resolve(expectedResponse)
+    );
     try {
       await courseController.getCourses();
     } catch (error) {
@@ -47,7 +51,9 @@ describe('getCourse tests', () => {
   test('should return found course', async () => {
     const id = 1;
     const expectedResponse = { id, name: 'Course 1' };
-    mockDbHelper.findCourseById = jest.fn(() => Promise.resolve(expectedResponse));
+    mockDbHelper.findCourseById = jest.fn(() =>
+      Promise.resolve(expectedResponse)
+    );
     const result = await courseController.getCourse(id);
     expect(mockDbHelper.findCourseById).toHaveBeenCalledTimes(1);
     expect(result).toBe(expectedResponse);
@@ -56,7 +62,9 @@ describe('getCourse tests', () => {
   test('should throw an error if the course with id is not found', async () => {
     const expectedResponse = undefined;
     const id = 1;
-    mockDbHelper.findCourseById = jest.fn(() => Promise.resolve(expectedResponse));
+    mockDbHelper.findCourseById = jest.fn(() =>
+      Promise.resolve(expectedResponse)
+    );
     try {
       await courseController.getCourse(id);
     } catch (error) {
@@ -82,7 +90,9 @@ describe('createCourse tests', () => {
   test('should return error from dbHelper.createCourse', async () => {
     const course = { name: 'Course 1' };
     validateCourse.mockImplementationOnce(() => 'Success');
-    mockDbHelper.createCourse = jest.fn(() => Promise.reject(new Error('dbHelper.createCourse error')));
+    mockDbHelper.createCourse = jest.fn(() =>
+      Promise.reject(new Error('dbHelper.createCourse error'))
+    );
     try {
       await courseController.createCourse(course);
     } catch (error) {
@@ -111,7 +121,9 @@ describe('updateCourse tests', () => {
     const course = { name: 'New name' };
     const id = 1;
     validateCourse.mockImplementationOnce(() => 'Success');
-    mockDbHelper.updateCourse = jest.fn(() => Promise.reject(new Error('dbHelper.updateCourse error')));
+    mockDbHelper.updateCourse = jest.fn(() =>
+      Promise.reject(new Error('dbHelper.updateCourse error'))
+    );
     try {
       await courseController.updateCourse(course, id);
     } catch (error) {
@@ -126,7 +138,9 @@ describe('deleteCourse tests', () => {
   test('should return deleted course', async () => {
     const id = 1;
     const expectedResponse = { id, name: 'Course 1' };
-    mockDbHelper.findCourseById = jest.fn(() => Promise.resolve(expectedResponse));
+    mockDbHelper.findCourseById = jest.fn(() =>
+      Promise.resolve(expectedResponse)
+    );
     mockDbHelper.deleteCourse = jest.fn(() => Promise.resolve());
     const result = await courseController.deleteCourse(id);
     expect(mockDbHelper.findCourseById).toHaveBeenCalledTimes(1);
@@ -136,7 +150,9 @@ describe('deleteCourse tests', () => {
 
   test('should return error from dbHelper.findCourseById', async () => {
     const id = 1;
-    mockDbHelper.findCourseById = jest.fn(() => Promise.reject(new Error('dbHelper.findCourseById error')));
+    mockDbHelper.findCourseById = jest.fn(() =>
+      Promise.reject(new Error('dbHelper.findCourseById error'))
+    );
     try {
       await courseController.deleteCourse(id);
     } catch (error) {
@@ -149,8 +165,12 @@ describe('deleteCourse tests', () => {
   test('should return error from dbHelper.deleteCourse', async () => {
     const id = 1;
     const expectedResponse = { id, name: 'Course 1' };
-    mockDbHelper.findCourseById = jest.fn(() => Promise.resolve(expectedResponse));
-    mockDbHelper.deleteCourse = jest.fn(() => Promise.reject(new Error('dbHelper.deleteCourse error')));
+    mockDbHelper.findCourseById = jest.fn(() =>
+      Promise.resolve(expectedResponse)
+    );
+    mockDbHelper.deleteCourse = jest.fn(() =>
+      Promise.reject(new Error('dbHelper.deleteCourse error'))
+    );
     let result;
     try {
       result = await courseController.deleteCourse(id);
@@ -185,7 +205,9 @@ describe('checkCourseFormat tests', () => {
       expect(validateCourse).toHaveBeenCalledTimes(1);
       expect(validateCourse).toHaveBeenCalledWith(course);
       expect(error.status).toBe(400);
-      expect(error.message).toBe('Wrong format: "name" length must be at least 3 characters long');
+      expect(error.message).toBe(
+        'Wrong format: "name" length must be at least 3 characters long'
+      );
     }
   });
 

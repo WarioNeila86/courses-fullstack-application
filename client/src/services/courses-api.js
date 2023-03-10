@@ -8,9 +8,9 @@ const baseUrl = 'http://localhost:4000'
  * @returns Promise<object[]> - list of courses
  */
 export const getAllCourses = async () => {
-    const response = await axios.get(`${baseUrl}/api/courses`)
-    console.log(response)
-    return response.data
+  const response = await axios.get(`${baseUrl}/api/courses`)
+  console.log(response)
+  return response.data
 }
 
 /**
@@ -19,7 +19,7 @@ export const getAllCourses = async () => {
  * @returns Promise<object> - specific course
  */
 export const getCourseById = async (id) => {
-    const response = await axios.get(`${baseUrl}/api/courses/${id}`)
-    console.log(response)
-    return response.data
+  const response = await axios.get(`${baseUrl}/api/courses/${id}`)
+  console.log(response)
+  return response.data
 }

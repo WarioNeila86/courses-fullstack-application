@@ -12,7 +12,7 @@ const options = {
       title: 'Courses Express API with Swagger',
       version: '1.0.0',
       description:
-                'This is a simple CRUD API application made with Express to manage Courses, documented with Swagger',
+        'This is a simple CRUD API application made with Express to manage Courses, documented with Swagger',
       license: {
         name: 'MIT',
         url: 'https://spdx.org/licenses/MIT.html'
@@ -27,11 +27,7 @@ const options = {
 };
 
 const specs = swaggerJsdoc(options);
-app.use(
-  '/api/docs',
-  swaggerUi.serve,
-  swaggerUi.setup(specs)
-);
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(cors());
 

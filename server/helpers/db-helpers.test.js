@@ -73,14 +73,18 @@ describe('createCourse tests', () => {
 
   test('should throw an error if adding to database failed', async () => {
     const course = { name: 'Course 1' };
-    database.Course.create = jest.fn(() => Promise.reject(new Error('Database problem creating course')));
+    database.Course.create = jest.fn(() =>
+      Promise.reject(new Error('Database problem creating course'))
+    );
     try {
       await dbHelper.createCourse(course);
     } catch (error) {
       expect(database.Course.create).toHaveBeenCalledTimes(1);
       expect(database.Course.create).toHaveBeenCalledWith(course);
       expect(error.status).toBe(500);
-      expect(error.message).toBe('Unable to add course: Database problem creating course');
+      expect(error.message).toBe(
+        'Unable to add course: Database problem creating course'
+      );
     }
   });
 });
@@ -92,7 +96,9 @@ describe('updateCourse tests', () => {
     const foundCourse = { id, name: 'Course 1' };
     const updatedCourse = { id, name: newName };
     const mockSave = { save: jest.fn().mockResolvedValueOnce(updatedCourse) };
-    database.Course.findOne = jest.fn(() => Promise.resolve({ ...foundCourse, ...mockSave }));
+    database.Course.findOne = jest.fn(() =>
+      Promise.resolve({ ...foundCourse, ...mockSave })
+    );
     const result = await dbHelper.updateCourse(id, newName);
     expect(database.Course.findOne).toHaveBeenCalledTimes(1);
     expect(database.Course.findOne).toHaveBeenCalledWith({ where: { id } });
@@ -120,8 +126,12 @@ describe('updateCourse tests', () => {
     const newName = 'New name';
     const foundCourse = { id, name: 'Course 1' };
     const mockSave = { save: jest.fn() };
-    database.Course.findOne = jest.fn(() => Promise.resolve({ ...foundCourse, ...mockSave }));
-    mockSave.save = jest.fn(() => Promise.reject(new Error('Database problem saving data')));
+    database.Course.findOne = jest.fn(() =>
+      Promise.resolve({ ...foundCourse, ...mockSave })
+    );
+    mockSave.save = jest.fn(() =>
+      Promise.reject(new Error('Database problem saving data'))
+    );
     try {
       await dbHelper.updateCourse(id, newName);
     } catch (error) {
@@ -129,7 +139,9 @@ describe('updateCourse tests', () => {
       expect(database.Course.findOne).toHaveBeenCalledWith({ where: { id } });
       expect(mockSave.save).toHaveBeenCalledTimes(1);
       expect(error.status).toBe(500);
-      expect(error.message).toBe('Unable to update course: Database problem saving data');
+      expect(error.message).toBe(
+        'Unable to update course: Database problem saving data'
+      );
     }
   });
 });
@@ -145,14 +157,18 @@ describe('deleteCourse tests', () => {
 
   test('should throw an error if deleting in database failed', async () => {
     const id = 1;
-    database.Course.destroy = jest.fn(() => Promise.reject(new Error('Database problem deleting data')));
+    database.Course.destroy = jest.fn(() =>
+      Promise.reject(new Error('Database problem deleting data'))
+    );
     try {
       await dbHelper.deleteCourse(id);
     } catch (error) {
       expect(database.Course.destroy).toHaveBeenCalledTimes(1);
       expect(database.Course.destroy).toHaveBeenCalledWith({ where: { id } });
       expect(error.status).toBe(500);
-      expect(error.message).toBe('Unable to delete course: Database problem deleting data');
+      expect(error.message).toBe(
+        'Unable to delete course: Database problem deleting data'
+      );
     }
   });
 });

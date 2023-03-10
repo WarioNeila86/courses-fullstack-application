@@ -5,15 +5,12 @@ import { CourseDetails } from './components/CourseDetails'
 import './App.css'
 
 export function App() {
-    return (
-        <div className="container">
-            <Routes>
-                <Route path="/" element={<CourseList />} />
-                <Route
-                    path="/courseDetails/:courseId"
-                    element={<CourseDetails />}
-                />
-            </Routes>
-        </div>
-    )
+  return (
+    <div className="container">
+      <Routes>
+        <Route path="/" element={<CourseList />} />
+        <Route path="/courseDetails/:courseId" element={<CourseDetails />} />
+      </Routes>
+    </div>
+  )
 }

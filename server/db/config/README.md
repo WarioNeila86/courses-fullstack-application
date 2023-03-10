@@ -1,11 +1,12 @@
 # Sequelize config file
 
 There can be different environments and for each we need to specify:
-* DB username
-* DB password
-* DB to use
-* Host address
-* Dialect (eg. postgres, mysql, etc)
+
+- DB username
+- DB password
+- DB to use
+- Host address
+- Dialect (eg. postgres, mysql, etc)
 
 The keys of the objects (e.g. "development") are used on model/index.js for matching `process.env.NODE_ENV` (When undefined, "development" is a default value).
 

@@ -5,9 +5,8 @@ module.exports = {
     jest: true,
     node: true
   },
-  extends: 'standard',
-  overrides: [
-  ],
+  extends: ['standard', 'eslint-config-prettier'],
+  overrides: [],
   parserOptions: {
     ecmaVersion: 'latest'
   },

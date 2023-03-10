@@ -190,7 +190,10 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const courseController = new CourseController();
   try {
-    const updatedCourse = await courseController.updateCourse(Number(req.params.id), req.body);
+    const updatedCourse = await courseController.updateCourse(
+      Number(req.params.id),
+      req.body
+    );
     res.send(updatedCourse);
   } catch (error) {
     res.status(error.status).send(error.message);
@@ -228,7 +231,9 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const courseController = new CourseController();
   try {
-    const deletedCourse = await courseController.deleteCourse(Number(req.params.id));
+    const deletedCourse = await courseController.deleteCourse(
+      Number(req.params.id)
+    );
     res.send(deletedCourse);
   } catch (error) {
     res.status(error.status).send(error.message);

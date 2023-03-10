@@ -6,10 +6,7 @@ const myFormat = printf(({ level, message, timestamp }) => {
 });
 
 const logger = createLogger({
-  format: combine(
-    timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    myFormat
-  ),
+  format: combine(timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), myFormat),
   transports: [
     new transports.Console(),
     new transports.File({ filename: './logs/combined.log' })

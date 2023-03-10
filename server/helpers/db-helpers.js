@@ -2,10 +2,10 @@ const database = require('../db/models');
 
 class DbHelper {
   /**
-     * Find all courses in the database
-     * @returns {Promise<Array[Object]>} - Found courses
-     */
-  async findAllCourses () {
+   * Find all courses in the database
+   * @returns {Promise<Array[Object]>} - Found courses
+   */
+  async findAllCourses() {
     const courses = await database.Course.findAll();
     if (courses) {
       return courses;
@@ -16,11 +16,11 @@ class DbHelper {
   }
 
   /**
-     * Search for a course in the database, throws an error if the course is not found
-     * @param {number} id - The id of the course to retrieve
-     * @returns {Promise<Object>} - Found course
-     */
-  async findCourseById (id) {
+   * Search for a course in the database, throws an error if the course is not found
+   * @param {number} id - The id of the course to retrieve
+   * @returns {Promise<Object>} - Found course
+   */
+  async findCourseById(id) {
     const foundCourse = await database.Course.findOne({
       where: { id }
     });
@@ -33,11 +33,11 @@ class DbHelper {
   }
 
   /**
-     * Create a course in the database
-     * @param {{name: string}} course - Object containing course name
-     * @returns {Promise<Object>} - Course added
-     */
-  async createCourse (course) {
+   * Create a course in the database
+   * @param {{name: string}} course - Object containing course name
+   * @returns {Promise<Object>} - Course added
+   */
+  async createCourse(course) {
     try {
       return await database.Course.create(course);
     } catch (error) {
@@ -48,13 +48,13 @@ class DbHelper {
   }
 
   /**
-     * Modifies a course already stored in the database
-     * Throws an error if the course is not found or the new name format is incorrect
-     * @param {number} id - The id of the course to modify
-     * @param {string} newName - New name for the course
-     * @returns {Promise<Object>} - Course updated
-     */
-  async updateCourse (id, newName) {
+   * Modifies a course already stored in the database
+   * Throws an error if the course is not found or the new name format is incorrect
+   * @param {number} id - The id of the course to modify
+   * @param {string} newName - New name for the course
+   * @returns {Promise<Object>} - Course updated
+   */
+  async updateCourse(id, newName) {
     const foundCourse = await this.findCourseById(id);
     foundCourse.name = newName;
     try {
@@ -67,11 +67,11 @@ class DbHelper {
   }
 
   /**
-     * Deletes a course from the database
-     * @param {number} id - The id of the course to delete
-     * @returns {Promise<void>}
-     */
-  async deleteCourse (id) {
+   * Deletes a course from the database
+   * @param {number} id - The id of the course to delete
+   * @returns {Promise<void>}
+   */
+  async deleteCourse(id) {
     try {
       await database.Course.destroy({
         where: { id }
