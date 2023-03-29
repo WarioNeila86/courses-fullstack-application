@@ -8,6 +8,7 @@
     "client-preview": "vite preview",
     "server-start": "node server/server.js",
     "server-start-dev": "nodemon server/server.js",
+    "start": "node server/server.js & vite serve client --config client/vite.config.js",
     "test": "jest",
     "prepare": "husky install"
   },
