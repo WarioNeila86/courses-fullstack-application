@@ -16,6 +16,7 @@ export const getAllCourses = async () => {
 /**
  * Gets course by id from the server
  *
+ * @param {string} id - course id
  * @returns Promise<object> - specific course
  */
 export const getCourseById = async (id) => {
@@ -27,11 +28,26 @@ export const getCourseById = async (id) => {
 /**
  * Creates new course
  *
+ * @param {string} courseName - course name
  * @returns Promise<object> - specific course
  */
 export const createCourse = async (courseName) => {
   const body = { name: courseName }
   const response = await axios.post(`${baseUrl}/api/courses/`, body)
+  console.log(response)
+  return response.data
+}
+
+/**
+ * Updates existing course
+ *
+ * @param {string} id - course id
+ * @param {string} courseName - course name
+ * @returns Promise<object> - specific course
+ */
+export const updateCourse = async (id, courseName) => {
+  const body = { name: courseName }
+  const response = await axios.put(`${baseUrl}/api/courses/${id}`, body)
   console.log(response)
   return response.data
 }
