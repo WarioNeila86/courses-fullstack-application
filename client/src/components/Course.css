@@ -3,4 +3,8 @@
   border: 1px solid gray;
   border-radius: 0.5rem;
   margin: 0.75rem 0;
+  display: grid;
+  grid-template-columns: 50px 400px 100px;
+  align-items: start;
+  justify-content: space-between;
 }
