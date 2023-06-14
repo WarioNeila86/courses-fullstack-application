@@ -51,3 +51,15 @@ export const updateCourse = async (id, courseName) => {
   console.log(response)
   return response.data
 }
+
+/**
+ * Deletes existing course
+ *
+ * @param {string} id - course id to delete
+ * @returns Promise<object> - deleted course
+ */
+export const deleteCourse = async (id) => {
+  const response = await axios.delete(`${baseUrl}/api/courses/${id}`)
+  console.log(response)
+  return response.data
+}
