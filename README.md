@@ -46,6 +46,7 @@ For now the frontend client shows all courses and allows searching by id
 
 ### How to execute the server/client app:
 
+- Start the app: `npm run start`
 - Start the server: `npm run server-start` - server can be accessed on http://localhost:4000/
 - Start the server in development mode (it will automatically restart after changes are made): `npm run server-start-dev`
 - Start the client: `npm run client-run-dev` - client can be accessed on http://localhost:3000/
