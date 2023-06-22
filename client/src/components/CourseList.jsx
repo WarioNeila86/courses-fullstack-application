@@ -12,17 +12,17 @@ export function CourseList() {
     getAllCourses().then(setCourses).catch(console.error)
   }, [])
 
-    return (
-        <div className="courseList">
-            <h1>Courses List</h1>
-            {!courses || courses.length === 0 ? (
-                <p>Loading...</p>
-            ) : (
-                courses
-                    .sort((a, b) => a.id - b.id)
-                    .map((course) => <Course course={course} key={course.id} />)
-            )}
-            <AddCourse />
-        </div>
-    )
+  return (
+    <div className="courseList">
+      <h1>Courses List</h1>
+      {!courses || courses.length === 0 ? (
+        <p>Loading...</p>
+      ) : (
+        courses
+          .sort((a, b) => a.id - b.id)
+          .map((course) => <Course course={course} key={course.id} />)
+      )}
+      <AddCourse />
+    </div>
+  )
 }

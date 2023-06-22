@@ -6,7 +6,10 @@ export function Course({ course }) {
 
   return (
     <div className="course">
-      <div>{id}</div> <div>{name}</div><div className="link"><a href={`/courseDetails/${id}`}>More details</a></div>
+      <div>{id}</div> <div>{name}</div>
+      <div className="link">
+        <a href={`/courseDetails/${id}`}>More details</a>
+      </div>
     </div>
   )
 }
