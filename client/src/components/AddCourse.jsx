@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {createCourse} from '../services/courses-api'
+import './AddCourse.css'
 
 export function AddCourse() {
   const [courseName, setCourseName] = useState('');
@@ -21,7 +22,7 @@ export function AddCourse() {
           <h2>Add course</h2>
           <label>
             Course name:
-            <input type='text' value={courseName} onChange={(event) => setCourseName(event.target.value)} />
+            <input className='textBox' type='text' value={courseName} onChange={(event) => setCourseName(event.target.value)} />
           </label>
           <input type='submit' value='Submit' />
         </form>
