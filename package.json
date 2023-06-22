@@ -20,6 +20,11 @@
   "license": "ISC",
   "homepage": "https://github.com/WarioNeila86/courses-fullstack-application#readme",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.3",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
     "axios": "^1.1.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

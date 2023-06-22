@@ -22,7 +22,7 @@ export function CourseList() {
           .sort((a, b) => a.id - b.id)
           .map((course) => <Course course={course} key={course.id} />)
       )}
-      <AddCourse />
+      <AddCourse courses={courses} setCourses={setCourses} />
     </div>
   )
 }
