@@ -1,4 +1,11 @@
 {
-  "*.{js,jsx}": ["eslint --fix", "prettier --write"],
+  "client/**/*.{js,jsx}": [
+    "eslint --fix --config client/eslint.config.js",
+    "prettier --write"
+  ],
+  "server/**/*.js": [
+    "eslint --fix --config server/eslint.config.js",
+    "prettier --write"
+  ],
   "*.md": "prettier --write"
 }

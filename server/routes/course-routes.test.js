@@ -41,7 +41,7 @@ describe('GET course by id tests', () => {
     );
     const response = await request(app).get(`/api/courses/${id}`);
     expect(mockCourseController.getCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.getCourse).toBeCalledWith(id);
+    expect(mockCourseController.getCourse).toHaveBeenCalledWith(id);
     expect(response.status).toBe(200);
     expect(response.body).toEqual(foundCourse);
   });
@@ -55,7 +55,7 @@ describe('GET course by id tests', () => {
     );
     const response = await request(app).get(`/api/courses/${id}`);
     expect(mockCourseController.getCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.getCourse).toBeCalledWith(id);
+    expect(mockCourseController.getCourse).toHaveBeenCalledWith(id);
     expect(response.status).toBe(404);
     expect(response.text).toEqual(error.message);
   });
@@ -70,7 +70,7 @@ describe('POST course tests', () => {
     );
     const response = await request(app).post('/api/courses/').send(newCourse);
     expect(mockCourseController.createCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.createCourse).toBeCalledWith(newCourse);
+    expect(mockCourseController.createCourse).toHaveBeenCalledWith(newCourse);
     expect(response.status).toBe(201);
     expect(response.body).toEqual(createdCourse);
   });
@@ -84,7 +84,7 @@ describe('POST course tests', () => {
     );
     const response = await request(app).post('/api/courses/').send(newCourse);
     expect(mockCourseController.createCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.createCourse).toBeCalledWith(newCourse);
+    expect(mockCourseController.createCourse).toHaveBeenCalledWith(newCourse);
     expect(response.status).toBe(500);
     expect(response.text).toEqual('Unable to create course');
   });
@@ -102,7 +102,10 @@ describe('PUT course tests', () => {
       .put(`/api/courses/${id}`)
       .send(newCourse);
     expect(mockCourseController.updateCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.updateCourse).toBeCalledWith(id, newCourse);
+    expect(mockCourseController.updateCourse).toHaveBeenCalledWith(
+      id,
+      newCourse
+    );
     expect(response.status).toBe(200);
     expect(response.body).toEqual(updatedCourse);
   });
@@ -119,7 +122,10 @@ describe('PUT course tests', () => {
       .put(`/api/courses/${id}`)
       .send(newCourse);
     expect(mockCourseController.updateCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.updateCourse).toBeCalledWith(id, newCourse);
+    expect(mockCourseController.updateCourse).toHaveBeenCalledWith(
+      id,
+      newCourse
+    );
     expect(response.status).toBe(500);
     expect(response.text).toEqual('Unable to update course');
   });
@@ -134,7 +140,7 @@ describe('DELETE course tests', () => {
     );
     const response = await request(app).delete(`/api/courses/${id}`);
     expect(mockCourseController.deleteCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.deleteCourse).toBeCalledWith(id);
+    expect(mockCourseController.deleteCourse).toHaveBeenCalledWith(id);
     expect(response.status).toBe(200);
     expect(response.body).toEqual(deletedCourse);
   });
@@ -148,7 +154,7 @@ describe('DELETE course tests', () => {
     );
     const response = await request(app).delete(`/api/courses/${id}`);
     expect(mockCourseController.deleteCourse).toHaveBeenCalledTimes(1);
-    expect(mockCourseController.deleteCourse).toBeCalledWith(id);
+    expect(mockCourseController.deleteCourse).toHaveBeenCalledWith(id);
     expect(response.status).toBe(500);
     expect(response.text).toEqual(error.message);
   });
