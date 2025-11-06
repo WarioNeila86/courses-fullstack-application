@@ -2,23 +2,23 @@
   "name": "courses-fullstack-application",
   "version": "1.0.0",
   "description": "Full Stack application to manage courses using PERN stack",
+  "homepage": "https://github.com/WarioNeila86/courses-fullstack-application#readme",
+  "repository": {
+    "url": "git@github.com:WarioNeila86/courses-fullstack-application.git"
+  },
+  "license": "ISC",
+  "author": "",
   "scripts": {
-    "client-run-dev": "vite serve client --config client/vite.config.js",
     "client-build": "vite build",
     "client-preview": "vite preview",
+    "client-run-dev": "vite serve client --config client/vite.config.js",
+    "db-setup": "sequelize-cli db:create && sequelize-cli db:migrate && sequelize-cli db:seed:all",
+    "prepare": "husky install",
     "server-start": "node server/server.js",
     "server-start-dev": "nodemon server/server.js",
     "start": "node server/server.js & vite serve client --config client/vite.config.js",
-    "test": "jest",
-    "prepare": "husky install"
+    "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/WarioNeila86/courses-fullstack-application.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "homepage": "https://github.com/WarioNeila86/courses-fullstack-application#readme",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -41,6 +41,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@jest/globals": "^30.2.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
@@ -52,10 +53,11 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.10",
     "husky": "^8.0.1",
-    "jest": "26.6.0",
+    "jest": "^29.7.0",
     "lint-staged": "^13.1.0",
     "nodemon": "^2.0.6",
     "prettier": "^2.7.1",
+    "sequelize-cli": "^6.6.3",
     "supertest": "^6.0.1",
     "vite": "^3.2.7"
   }

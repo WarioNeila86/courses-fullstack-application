@@ -1,50 +1,86 @@
-# Full Stack Courses application
+# Full Stack Courses Application
 
-This is a personal project to learn about frontend development with React and backend development with NodeJS and Express
+This is a personal project to learn about frontend development with React and backend development with NodeJS and Express.
 
-Full Stack application to manage courses. It uses _PERN_ stack:
+Full Stack application to manage courses using the **PERN stack**:
 
 - **P**ostgreSQL for the database
-- **E**xpress for the server
-- **R**eact for the frontend side
-- **N**ode.js for the server
+- **E**xpress for the backend server
+- **R**eact for the frontend
+- **N**ode.js for runtime
 
 ---
 
-## Server side: REST API with NodeJS, Express & Sequelize with PostgreSQL
+## 🧠 Overview
 
-REST API server to manage courses, which allows you to perform all CRUD operations:
+### Server side: REST API with Node.js, Express & Sequelize (PostgreSQL)
+
+REST API to manage courses — it supports full CRUD:
 
 - **C**reate new courses
-- **R**ead existing courses (getting full list or searching by id)
-- **U**pdate existing course
-- **D**elete existing course
+- **R**ead existing courses (get all or by ID)
+- **U**pdate existing courses
+- **D**elete courses
 
-## Frontend client side: React app created using vite
+### Client side: React app created using Vite
 
-For now the frontend client shows all courses and allows searching by id
+For now, the frontend client shows all courses and allows searching by ID.
 
 <img src="https://user-images.githubusercontent.com/6084473/200138408-25f6d8e3-6391-4252-b783-a237e54a8e01.png" alt="Courses list" width="600" >
 
 ---
 
-### Prerequisites
+## ⚙️ Prerequisites
 
-- Install [nodeJS](https://nodejs.org/en/)
-- Clone this repo
-- Install project dependencies by running `npm install`
-- Install postgresql database:
-  - Create DB user: `sudo -u postgres psql -c "CREATE USER \"db-user\" PASSWORD 'db-password' CREATEDB;"`
-  - Create database: `npx sequelize-cli db:create`
-  - Create tables: `npx sequelize-cli db:migrate`
-  - Populate table: `npx sequelize-cli db:seed:all`
-- Create a `.env` file containing your database username and password:
+- [Node.js](https://nodejs.org/en/) (v18+ recommended)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [Git](https://git-scm.com/downloads)
+
+---
+
+## 🚀 Setup Instructions
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone git@github.com:WarioNeila86/courses-fullstack-application.git
+cd courses-fullstack-application
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Configure the database
+
+- Create PostgreSQL DB user
+  - Windows:
+    ```bash
+    psql -U postgres
+    CREATE USER "db-user" PASSWORD 'db-password' CREATEDB;
+    ```
+  - Linux:
+    ```bash
+    sudo -u postgres psql -c "CREATE USER \"db-user\" PASSWORD 'db-password' CREATEDB;"
+    ```
+
+### 4️⃣ Create the .env file
+
+- Create a `.env` file in the root directory and add the following variables:
   ```
   DB_DEVELOPMENT_USERNAME=db-user
   DB_DEVELOPMENT_PASSWORD=db-password
   ```
 
-### How to execute the server/client app:
+### 5️⃣ Create and seed the database
+
+```bash
+npm run db-setup
+```
+
+### 6️⃣ Start the application
 
 - Start the app: `npm run start`
 - Start the server: `npm run server-start` - server can be accessed on http://localhost:4000/
@@ -52,11 +88,13 @@ For now the frontend client shows all courses and allows searching by id
 - Start the client: `npm run client-run-dev` - client can be accessed on http://localhost:3000/
 - After starting the server, Swagger documentation can be accessed on http://localhost:4000/api/docs/
 
-## Additional scripts:
+### 7️⃣ Run tests
 
-- Run unit tests: `npm test`
+```bash
+npm test
+```
 
-### Sources
+## 📌 Sources
 
 - 📺 YouTube course: [How to build a REST API with Node js & Express
   ](https://www.youtube.com/watch?v=pKd0Rpw7O48)
